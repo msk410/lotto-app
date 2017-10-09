@@ -1,8 +1,6 @@
 
 import Game from "./Game";
  export default class NyLotto {
-    aaa()  {
-    return "hey"}
 
      async blah() {
      let lottoData = [];
@@ -98,20 +96,20 @@ import Game from "./Game";
                     nums10.push(tempGame);
                 })
 
-                await lottoData.push(nums2);
-                await lottoData.push(nums1);
-                await lottoData.push(nums4);
-                await lottoData.push(nums3);
-                await lottoData.push(nums5);
-                await lottoData.push(nums6);
-                await lottoData.push(nums7);
-                await lottoData.push(nums8);
-                await lottoData.push(nums9);
-                await lottoData.push(nums10);
+                 lottoData.push(nums2);
+                 lottoData.push(nums1);
+                 lottoData.push(nums4);
+                 lottoData.push(nums3);
+                 lottoData.push(nums5);
+                 lottoData.push(nums6);
+                 lottoData.push(nums7);
+                 lottoData.push(nums8);
+                 lottoData.push(nums9);
+                 lottoData.push(nums10);
 
             } catch (err) {
         console.log(err + "error");
      }
-     return await lottoData;
+     return lottoData;
      }
   }

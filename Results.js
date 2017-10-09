@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { AppRegistry, Text, View, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 export default class Results extends Component {
+
 
     getDate() {
         console.log(this.props.game[0].date)
