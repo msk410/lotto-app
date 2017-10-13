@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Text, AppRegistry, Alert, TouchableOpacity,TextInput, Image ,StyleSheet, View, ScrollView } from 'react-native';
 import Game from "./Game";
- export default class NyLotto extends Component {
+export default class NyLotto extends Component {
 
     constructor(props) {
         super(props);

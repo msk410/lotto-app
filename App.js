@@ -1,59 +1,38 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, Button, ScrollView, StatusBar, Image, AsyncStorage, Alert } from 'react-native';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import Testing from "./Testing"
 import Results from "./Results"
+import { Button as Button1, Header} from 'react-native-elements';
+import { Icon } from 'react-native-elements'
+import MyLocation from "./MyLocation"
+//import StackNav from "./StackNav"
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Hello'
+
+const stackNav = StackNavigator({
+    Main: {
+        screen: MyLocation,
+        navigationOptions:({navigation}) => ({
+            title: "Main",
+            headerLeft:(
+                <Icon
+                onPress = {() => Alert.alert("hey")}
+                          name='pencil'
+                          type = "material-community"/>),
+            headerStyle: { paddingRight: 10, paddingLeft: 10 }
+        })
+    },
+
+
+})
+
+
+
+
+class TestScreen extends Component {
+ static navigationOptions = {
+    drawerLabel: 'Test Screen afsdfas',
   };
-  render() {
-  const {navigate} =this.props.navigation;
-
-    return(
-    <View>
-    <Text>Hello, Navidation!</Text>
-            <Button
-              onPress={() => navigate('Chat')}
-              title="Chat with Lucy"/>
-                <Button
-                            onPress={() => navigate('Test')}
-                            title="Go to test"/>
-            <Button
-              onPress={() => navigate('RealTest')}
-              title="Please Work"/>
-    </View>
-  )}
-}
-
-class ChatScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Chat with Lucy',
-
-  };
-  render() {
-    return (
-      <View>
-        <Text>Chat with Lucy</Text>
-      </View>
-    );
-  }
-}
-class TestScreen extends React.Component {
-  static navigationOptions = {
-    title: 'test screen',
-
-  };
-  render() {
-    return (
-      <View>
-        <Text>testing screen</Text>
-      </View>
-    );
-  }
-}
-class RealTest extends React.Component {
 constructor(props) {
         super(props);
           this.state = {
@@ -67,15 +46,15 @@ constructor(props) {
         this.setState({
             testData: b
         })
-        console.log(this.state.testData[0][0]);
      }
   static navigationOptions = {
-    title: 'Real Test',
+    title: 'Real Test my man',
 
   };
   render() {
     return (
             <View style={{alignSelf: "stretch", marginTop: 30}}>
+            <StatusBar hidden={true} />
             <Text>Hey</Text>
 <ScrollView>
         {this.state.testData.map((elem,index) =>
@@ -90,28 +69,25 @@ constructor(props) {
 }
 
 
+ const MyApp = DrawerNavigator({
+  StackNav: {
+    screen : stackNav,
+  },
+    Test: {
+      screen :TestScreen,
+      },
 
-
-const SimpleApp = StackNavigator({
-  Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen },
-  Test: {screen : TestScreen},
-  RealTest: {screen: RealTest}
 });
 
-export default class App extends React.Component {
+export default class App extends Component {
 
   render() {
-    return <SimpleApp />;
+    return <MyApp />;
   }
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 100
-  }
+  icon: {
+    width: 24,
+    height: 24,
+  },
 });
