@@ -9,13 +9,11 @@ export default class MyLocation extends Component {
 constructor(props) {
         super(props);
           this.state = {
-            myLocation: 'NY',
-            modalVisible: false,
+            myLocation: '',
           };
   }
 
   static navigationOptions = {
-  title: "hey",
       drawerLabel: 'My Location',
       drawerIcon: () => (
         <Icon
@@ -25,21 +23,24 @@ constructor(props) {
    };
   componentWillMount() {
        this.getLocation().then((data) => {
-       console.log("setting location to " + data)
        this.setState({
                   myLocation: data
                 })
       }).catch((err) => console.log(err))
-      console.log(this.state.myLocation + " wtf")
     }
 
-  async saveLocation() {
+   saveLocation(loc) {
     try {
-      await AsyncStorage.setItem('@MyLocation:key', 'NY');
+       AsyncStorage.setItem('@MyLocation:key', loc);
+      this.setState({
+        myLocation: loc
+      })
+
     } catch (error) {
       // Error saving data
       console.log("save error")
     }
+    this.props.navigation.navigate("WinningNumbers")
   }
 
    async getLocation() {
@@ -48,7 +49,6 @@ constructor(props) {
 
         if (value !== null){
           // We have data!!
-          console.log("in get location" + value)
           return value
         }
       } catch (error) {
@@ -57,27 +57,28 @@ constructor(props) {
         return "CA";
       }
   }
- setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
   render() {
     return (
 
-        <View style = {{flex: 1}}>
+        <View style = {{flex: 1,  backgroundColor: "#f9f9f9"}}>
                 <StatusBar hidden = {true}/>
+                <Header openDrawer = {() => this.props.navigation.navigate('DrawerOpen')} title = {"Select Your State"}/>
                 <FlatList
                   data={[
-                    {key: 'New York',
-                     ab: "NY"
-                    },
                     {key: 'California',
                      ab: "CA"
                     },
+                    {key: 'New York',
+                     ab: "NY"
+                    },
+                    {key: 'Texas',
+                     ab: "TX"
+                    },
                   ]}
-                  renderItem={({item}) => <TouchableOpacity onPress={() => {Alert.alert(item.ab)}}>
-                    <Text style = {{paddingTop: 5, paddingBottom : 5, paddingLeft: 10, fontSize : 30, marginTop : 5, borderBottomColor: '#bbb', borderBottomWidth: StyleSheet.hairlineWidth}}>{item.key}
+                  renderItem={({item}) => <TouchableOpacity style ={{  backgroundColor: "#ffffff", justifyContent: 'space-between', flexDirection:'row', flexWrap:'wrap',  borderBottomColor: '#bbb', borderBottomWidth: StyleSheet.hairlineWidth}} onPress={() => this.saveLocation(item.ab)}>
+                    <Text style = {{ paddingTop: 5, paddingBottom : 5, paddingLeft: 10, fontSize : 30, marginTop : 5,}}>{item.key}
                     </Text>
+                    {this.state.myLocation === item.ab && <Icon  name='check' type = "material-community" color = "#428bca"/> }
                   </TouchableOpacity>}
                 />
               </View>

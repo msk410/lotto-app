@@ -129,7 +129,7 @@ export default class NyLotto extends Component {
   render() {
     return (
 <ScrollView>
-<TouchableOpacity onPress={() => {Alert.alert("hey")}}>
+<TouchableOpacity>
 
 <View style={{flexDirection:'row', flexWrap:'wrap', marginTop: 30, backgroundColor: 'pink'}}>
 <Text>{this.state.nyLottories.length === 0 ? "emppty" : this.state.nyLottories[0][0].date}</Text>

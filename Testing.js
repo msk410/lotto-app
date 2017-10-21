@@ -13,7 +13,7 @@ import Game from "./Game";
         let nums1 = [];
         powerballData.map((elem, index) => {
             let tempGame = new Game("Powerball", elem.draw_date, elem.winning_numbers.split(" ").splice(0, 5),
-                                    elem.winning_numbers.split(" ")[5], elem.multiplier, " x ")
+                                    elem.winning_numbers.split(" ")[5], elem.multiplier, "Power Play x ")
             nums1.push(tempGame);
             })
 
@@ -25,7 +25,7 @@ import Game from "./Game";
                 let nums2 = [];
                 megaMillionsData.map((elem, index) => {
                     let tempGame = new Game("Mega Millions", elem.draw_date, elem.winning_numbers.split(" "),
-                        elem.mega_ball, elem.multiplier, " x ")
+                        elem.mega_ball, elem.multiplier, "Megaplier x ")
                     nums2.push(tempGame);
                 })
 

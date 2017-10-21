@@ -5,7 +5,6 @@ export default class Results extends Component {
 
 
     getDate() {
-        console.log(this.props.game[0].date)
         let date = this.props.game[0].date.split("T")[0];
         let d = new Date(date);
         let day = d.getDay();
@@ -41,12 +40,12 @@ export default class Results extends Component {
 
     render() {
         return (
-            <View>
+            <View  style = {{alignItems: 'center', justifyContent:'center', borderWidth: 0.5,  borderColor: '#000000' }}>
                 <Text style = {styles.myText}>{this.props.game[0].name}  {this.getDate()}</Text>
-                <TouchableOpacity onPress={() => {Alert.alert("hey")}} style={{backgroundColor: 'pink'}}>
-                        <View style ={{flexDirection:'row', flexWrap:'wrap'}}>
+
+                        <View style ={{alignItems: 'center', justifyContent:'center', flexDirection:'row', flexWrap:'wrap'}}>
                     {this.props.game[0].winningNumbers.map((elem, index) =>
-                        <Text style = {styles.circle}>{elem[0] === "0" && elem.length > 1 ? elem[1] : elem} </Text>
+                        <Text key = {index} style = {styles.circle}>{elem[0] === "0" && elem.length > 1 ? elem[1] : elem} </Text>
                     )}
                     {this.props.game[0].bonus.length != 0 ?
                     <Text style={ styles.bonusCircle}>
@@ -58,7 +57,6 @@ export default class Results extends Component {
                         <Text >{"\n"}</Text><Text style ={styles.extraStuff}>{this.props.game[0].extraText}</Text>
                         <Text style = {styles.extraStuff}>{this.props.game[0].extra[0] === "0" && this.props.game[0].extra.length > 1 ? this.props.game[0].extra[1] : this.props.game[0].extra }</Text>
                     </View>
-                </TouchableOpacity>
 
             </View>
         )
@@ -76,8 +74,10 @@ const styles = StyleSheet.create({
        height: 45,
        width: 45,
        borderRadius: 30 ,
-       backgroundColor: 'lightgrey',
-       paddingLeft: 5
+       backgroundColor: 'white',
+       paddingLeft: 5,
+       borderWidth: 0.5,
+       borderColor: '#000000',
      },
        bonusCircle: {
             fontSize: 25,
