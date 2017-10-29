@@ -16,7 +16,7 @@ constructor(props) {
         super(props);
           this.state = {
             saveGameVisible: false,
-            myNums: this.initState(),   
+            myNums: this.initState(),
           };
   }
 
