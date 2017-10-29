@@ -6,15 +6,20 @@ import MyLocation from "./MyLocation"
 import StackNav from "./StackNav"
 import Header from "./Header"
 import WinningNumbers from "./WinningNumbers"
+import MyNumbers from "./MyNumbers"
 
 
  const MyApp = DrawerNavigator({
   MyLocation: {
     screen: MyLocation,
+      headerMode: 'none'
   },
   WinningNumbers: {
     screen :WinningNumbers,
     },
+  MyNumbers: {
+    screen: MyNumbers,
+  },
 });
 
 export default class App extends Component {

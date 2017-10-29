@@ -18,7 +18,6 @@ constructor(props) {
         super(props);
           this.state = {
             testData: [],
-            wtf : ""
           };
   }
      async componentWillMount() {
@@ -44,13 +43,6 @@ constructor(props) {
               console.log("error 1")
             }
 
-
-//
-//        let a = new Testing();
-//        let b = await a.blah();
-//        this.setState({
-//            testData: b
-//        })
      }
 
 

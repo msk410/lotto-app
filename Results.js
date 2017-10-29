@@ -5,6 +5,9 @@ export default class Results extends Component {
 
 
     getDate() {
+    if(this.props.game[0].date === "") {
+        return ""
+    }
         let date = this.props.game[0].date.split("T")[0];
         let d = new Date(date);
         let day = d.getDay();
