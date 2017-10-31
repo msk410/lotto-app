@@ -18,7 +18,8 @@ constructor(props) {
         super(props);
           this.state = {
             testData: [],
-            modalVisible: false
+            modalVisible: false,
+            modalMessage: [],
           };
   }
      async componentWillMount() {
@@ -46,11 +47,51 @@ constructor(props) {
             }
 
 
-        const savedNums = await AsyncStorage.getItem('MyGame');
+        const rawSavedNums = await AsyncStorage.getItem('MyGame');
+        savedNums = JSON.parse(rawSavedNums);
         if(savedNums !== null) {
             if(savedNums.length > 0) {
-                console.log(this.state.testData[0][0])
-                this.setState({modalVisible:true})
+            let messageList = [];
+                for(let i = 0; i < savedNums.length; i++) {
+                    let isBonusMatch = false;
+                    let numMatches = 0;
+                    let matchingNumsObject = {}
+                    if(savedNums[i].gameName === this.state.testData[0][0].name) {
+                        if(savedNums[i].bonusNum === this.state.testData[0][0].bonus) {
+                        isBonusMatch = true;
+                        }
+                        for(let j = 0; j < savedNums[i].nums.length; j++) {
+                            if(this.state.testData[0][0].winningNumbers.includes(savedNums[i].nums[j])) {
+                                matchingNumsObject[savedNums[i].nums[j]] = true;
+                            }
+                        }
+                        numMatches = Object.keys(matchingNumsObject).length;
+                        let winningMessage = "";
+                        if(isBonusMatch && numMatches === 0) {
+                            winningMessage = "Your bonus number " + savedNums[i].bonusNum + " matched 0 + 1. Prize: $2"
+                        } else if(isBonusMatch && numMatches === 1) {
+                            winningMessage = "Your numbers " + savedNums[i].nums + " / " + savedNums[i].bonusNum + " matched 1 + 1. Prize: $4"
+                        } else if(isBonusMatch && numMatches === 2) {
+                            winningMessage = "Your numbers " + savedNums[i].nums + " / " + savedNums[i].bonusNum + " matched 2 + 1. Prize: $10"
+                        } else if(!isBonusMatch && numMatches === 3) {
+                            winningMessage = "Your numbers " + savedNums[i].nums + " matched 3 + 0. Prize: $10"
+                        } else if(isBonusMatch && numMatches === 3) {
+                             winningMessage = "Your numbers " + savedNums[i].nums + " " + savedNums[i].bonusNum + " matched 3 + 1. Prize: $200"
+                        } else if(!isBonusMatch && numMatches === 4) {
+                           winningMessage = "Your numbers " + savedNums[i].nums + " matched 4 + 0. Prize: $500"
+                        } else if(isBonusMatch && numMatches === 4) {
+                           winningMessage = "Your numbers " + savedNums[i].nums + " / " + savedNums[i].bonusNum + " matched 4 + 1. Prize: $10000"
+                        } else if(!isBonusMatch && numMatches === 5) {
+                          winningMessage = "Your numbers " + savedNums[i].nums + " matched 5 + 0. Prize: $1000000"
+                        } else if(isBonusMatch && numMatches === 5) {
+                             winningMessage = "Your numbers " + savedNums[i].nums + " / " + savedNums[i].bonusNum + " matched 5 + 1. Prize: JACKPOT!"
+                         }
+
+                         messageList.push(winningMessage);
+
+                    }
+                }
+                this.setState({modalVisible:true, modalMessage: messageList})
             }
         }
 
@@ -74,6 +115,7 @@ constructor(props) {
             }
 
             <Modal
+            
              animationType="fade"
              transparent={true}
              visible={this.state.modalVisible}
@@ -89,15 +131,22 @@ constructor(props) {
              <View style={{ backgroundColor: '#fff', padding: 20,
                                width: 300,
                                height: 300}}>
-               <Text>Hello World!</Text>
+                               <ScrollView>
+                                <View style = {{borderBottomColor: '#bbb', borderBottomWidth: 4,}}>
+               <Text>You may have won!</Text>
+               </View>
+               {this.state.modalMessage.map((elem,index) =>
+               <View style = {{borderBottomColor: '#bbb', borderBottomWidth: StyleSheet.hairlineWidth}}>
+                <Text>{elem}</Text>
+                </View>
+                )}
 
-               <TouchableHighlight onPress={() => {this.setState({modalVisible:false})
-               }}>
-                 <Text>Hide Modal</Text>
-               </TouchableHighlight>
-
+               </ScrollView>
+<Button title = "Ok" onPress={() => {this.setState({modalVisible:false})}} />
              </View>
+
             </View>
+
            </Modal>
 
             </View>

@@ -174,13 +174,14 @@ clearGame() {
 
 
                                                                            <Button
-                                                                             onPress={() => this.saveGame("Megamillions")}
+                                                                             onPress={() => this.saveGame("Mega Millions")}
                                                                              title="Save Game"
                                                                              color="#841584"
                                                                              accessibilityLabel="Learn more about this purple button"
                                                                            />
                                                                        </View>
                                                                        </View>}
+                                                                       <ScrollView>
                     {this.state.myNums.length > 0 &&
                     this.state.myNums.map((elem, index) =>
                      <View key = {index} style = {{alignItems: 'center', justifyContent:'center', borderWidth: 0.5,  borderColor: '#000000' }}>
@@ -207,6 +208,7 @@ clearGame() {
 
 
                     }
+                    </ScrollView>
                     <Button
                           onPress={() => this.clearGame()}
                           title="Clear Games"
