@@ -133,7 +133,7 @@ constructor(props) {
                                height: 300}}>
                                <ScrollView>
                                 <View style = {{borderBottomColor: '#bbb', borderBottomWidth: 4,}}>
-               <Text>You may have won!</Text>
+               <Text>You may have won on {this.state.testData.length > 0 && this.state.testData[0][0].date.split("T")[0]}! Check your numbers.</Text>
                </View>
                {this.state.modalMessage.map((elem,index) =>
                <View style = {{borderBottomColor: '#bbb', borderBottomWidth: StyleSheet.hairlineWidth}}>
