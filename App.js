@@ -7,7 +7,6 @@ import StackNav from "./StackNav"
 import Header from "./Header"
 import WinningNumbers from "./WinningNumbers"
 import MyNumbers from "./MyNumbers"
-import MyCamera from "./MyCamera"
 
 
  const MyApp = DrawerNavigator({
@@ -21,9 +20,6 @@ import MyCamera from "./MyCamera"
   MyNumbers: {
     screen: MyNumbers,
   },
-  MyCamera: {
-      screen: MyCamera,
-    },
 });
 
 export default class App extends Component {

@@ -6,6 +6,7 @@ import Testing from "./Testing"
 import Header from "./Header"
 import TexasScraper from "./TexasScraper"
 import { Icon } from 'react-native-elements'
+import CaliScraper from "./scrapers/CaliScraper"
 
 
 export default class WinningNumbers extends Component {
@@ -39,7 +40,14 @@ constructor(props) {
                     this.setState({
                                 testData: b
                             })
-                     }
+                 }else if(value === "CA") {
+                      let a = new CaliScraper();
+                      let b = await a.getAllData();
+
+                      this.setState({
+                                  testData: b
+                              })
+                       }
               }
             } catch (error) {
               // Error retrieving data

@@ -38,7 +38,7 @@ export default class Results extends Component {
                 dayOfWeek = "";
                 break;
         }
-        return dayOfWeek + (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "/" + d.getFullYear()
+        return dayOfWeek + date
     }
 
     render() {
