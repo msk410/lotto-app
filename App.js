@@ -7,24 +7,37 @@ import StackNav from "./StackNav"
 import Header from "./Header"
 import WinningNumbers from "./WinningNumbers"
 import MyNumbers from "./MyNumbers"
+import PastNumbers from "./PastNumbers"
+import SelectedGames from "./SelectedGames"
+import RefreshGames from "./RefreshGames"
 
 
  const MyApp = DrawerNavigator({
-  MyLocation: {
-    screen: MyLocation,
-      headerMode: 'none'
-  },
   WinningNumbers: {
     screen :WinningNumbers,
     },
+  MyLocation: {
+    screen: MyLocation,
+  },
   MyNumbers: {
     screen: MyNumbers,
+  },
+  PastNumbers: {
+    screen: PastNumbers,
+  },
+  SelectedGames: {
+    screen: SelectedGames,
+  },
+  RefreshGames: {
+    screen: RefreshGames,
   },
 });
 
 export default class App extends Component {
 
   render() {
+   {AsyncStorage.removeItem('oldState')}
+   {AsyncStorage.removeItem('gameInfo')}
     return <MyApp  />;
   }
 }

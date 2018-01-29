@@ -6,5 +6,6 @@ export default class Game {
         this.bonus = bonus;
         this.extra = extra;
         this.extraText = extraText;
+        this.showGame = true;
     }
 }

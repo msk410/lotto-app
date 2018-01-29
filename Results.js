@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { AppRegistry, Text, View, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import PastNumbers from "./PastNumbers"
 export default class Results extends Component {
 
 
@@ -10,29 +11,29 @@ export default class Results extends Component {
     }
         let date = this.props.game[0].date.split("T")[0];
         let d = new Date(date);
-        let day = d.getDay();
+        let day = d.getDay()-1;
         let dayOfWeek = "";
         switch(day) {
             case 0:
-                dayOfWeek = "Monday, ";
+                dayOfWeek = "Mon, ";
                 break;
             case 1:
-                dayOfWeek = "Tuesday, ";
+                dayOfWeek = "Tues, ";
                 break;
             case 2:
-                dayOfWeek = "Wednesday, ";
+                dayOfWeek = "Wed, ";
                 break;
             case 3:
-                dayOfWeek = "Thursday, ";
+                dayOfWeek = "Thurs, ";
                 break;
             case 4:
-                dayOfWeek = "Friday, ";
+                dayOfWeek = "Fri, ";
                 break;
             case 5:
-                dayOfWeek = "Saturday, ";
+                dayOfWeek = "Sat, ";
                 break;
             case 6:
-                dayOfWeek = "Sunday, ";
+                dayOfWeek = "Sun, ";
                 break;
              default:
                 dayOfWeek = "";
@@ -44,7 +45,7 @@ export default class Results extends Component {
     render() {
         return (
             <View  style = {{alignItems: 'center', justifyContent:'center', borderWidth: 0.5,  borderColor: '#000000' }}>
-                <Text style = {styles.myText}>{this.props.game[0].name}  {this.getDate()}</Text>
+                <Text style = {styles.myText}>{this.props.game[0].name} {this.getDate()}</Text>
 
                         <View style ={{alignItems: 'center', justifyContent:'center', flexDirection:'row', flexWrap:'wrap'}}>
                     {this.props.game[0].winningNumbers.map((elem, index) =>
@@ -61,6 +62,9 @@ export default class Results extends Component {
                         <Text style = {styles.extraStuff}>{this.props.game[0].extra[0] === "0" && this.props.game[0].extra.length > 1 ? this.props.game[0].extra[1] : this.props.game[0].extra }</Text>
                     </View>
 
+                <TouchableOpacity  onPress={() => this.props.navigate.navigate('PastNumbers', {game : this.props.game, state:this.props.state})}>
+                    <Text style = {{color: "#838383"}}>Tap here to see past winning numbers</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -74,8 +78,8 @@ const styles = StyleSheet.create({
        fontSize: 25,
        textAlign: 'center',
        textAlignVertical: 'center',
-       height: 45,
-       width: 45,
+       height: 50,
+       width: 50,
        borderRadius: 30 ,
        backgroundColor: 'white',
        paddingLeft: 5,
@@ -86,8 +90,8 @@ const styles = StyleSheet.create({
             fontSize: 25,
             textAlign: 'center',
             textAlignVertical: 'center',
-            height: 45,
-            width: 45,
+            height: 50,
+            width: 50,
             borderRadius: 30 ,
             backgroundColor: 'red',
           },
